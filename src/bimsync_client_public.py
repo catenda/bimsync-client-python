@@ -172,7 +172,7 @@ def niceModelName(originalWithPathAndExtension):
 def uploadIfcFolderToNewModels(folderPathWithFilter):
 	"""
 	#TODO: make next upload wait for previous to finish by asking for status by upload-token
-	#folderPathWithFilter ser slik ut "d:/diverse_store_filer/Campus_Aas_CONFIDENTIAL/Mappe2--Campus_Aas_BIM-files/*.ifc"
+	#folderPathWithFilter ser slik ut "c:/folder/*.ifc"
 	"""
 	filene = glob.glob(folderPathWithFilter)
 
@@ -191,14 +191,18 @@ def uploadIfcFolderToNewModels(folderPathWithFilter):
 		time.sleep(25*60) #every 25 minutes
 
 
+####  Authorize
 #GetAuthorized()
+#From the above we get the code, and use it by uncommenting the line below here (and commenting the one above here)
 #ACCESS_TOKEN = getAccessToken(CODE)
 #print("\nAccess token: " + ACCESS_TOKEN)
+# Access token is the one that can be reused
 
 
-per_page = 50
-page = 1
-types = [ "IfcDoor", "IfcWall" ]
-objects = getObjectsOfType(ACCESS_TOKEN, PROJECT_ID, types, per_page, page, True, True)
-print json.dumps(objects, indent=4, sort_keys=True)
+####  Get properties
+# per_page = 50
+# page = 1
+# types = [ "IfcDoor", "IfcWall" ]
+# objects = getObjectsOfType(ACCESS_TOKEN, PROJECT_ID, types, per_page, page, True, True)
+# print json.dumps(objects, indent=4, sort_keys=True)
 
