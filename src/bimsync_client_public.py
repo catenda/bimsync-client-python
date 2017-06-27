@@ -16,8 +16,8 @@ REDIRECT_URL = 'http://localhost:8000/bimsync/code'
 # Replace these variables with your app credentials and projectId
 CLIENT_ID='aaaa' change_me                    # Put your client id here
 CLIENT_SECRET= 'bbbbbb' change_me                # Put your client secret here
-CODE = "ccc" change_me
-ACCESS_TOKEN = "access_token_here" change_me
+#CODE = "ccc" change_me_later
+#ACCESS_TOKEN = "access_token_here" change_me_later_still
 
 #Insert your own project_id
 PROJECT_ID = "project_id_guid" change_me
