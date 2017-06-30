@@ -172,7 +172,7 @@ def niceModelName(originalWithPathAndExtension):
 def uploadIfcFolderToNewModels(folderPathWithFilter):
 	"""
 	#TODO: make next upload wait for previous to finish by asking for status by upload-token
-	#folderPathWithFilter ser slik ut "c:/folder/*.ifc"
+	#folderPathWithFilter looks like this: "c:/folder/*.ifc"
 	"""
 	filene = glob.glob(folderPathWithFilter)
 
