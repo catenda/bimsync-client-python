@@ -155,6 +155,23 @@ def getObjectsOfType(access_token, project_id, types, per_page, page, attributes
 
 	return objects
 
+def getObjectsOfTypeFromRevision(access_token, project_id, revision_number, types, per_page, page, attributes = False, definedBy = False):
+	data_dict = {"type": types, "attributes": attributes, "definedBy": definedBy} 	
+	data = json.dumps(data_dict)
+
+	if revision_number != None:
+		revision_part_string = "&revision_id=" + str(revision_number)
+	else:
+		revision_part_string = ""
+	
+	url = API_BASE_URL + 'project/products' + "?" + "project_id=" + project_id + revision_part_string + "&page=" + str(page) + "&per_page=" + str(per_page)
+	request = urllib2.Request(url, data, { "Authorization": "Bearer " + access_token})
+
+	answer = urllib2.urlopen(request).read().decode('utf-8')
+	objects = json.loads(answer)
+
+	return objects
+
 
 def getPropertiesOfObject(access_token, project_id):
 	url = API_BASE_URL + 'models' + "?" + "project_id=" + project_id
@@ -190,6 +207,21 @@ def uploadIfcFolderToNewModels(folderPathWithFilter):
 		print uploadModel(ACCESS_TOKEN, model_id, pent_navn, "", ifc_data)
 		time.sleep(25*60) #every 25 minutes
 
+def createGuidOidDict(types):
+	dict = {}
+	per_page = 1000
+	page = 1
+ 	
+	while True:
+		objects = getObjectsOfTypeFromRevision(ACCESS_TOKEN, PROJECT_ID, None, types, per_page, page, False, False)	
+		for cell in objects:
+			dict[ cell["globalId"] ] = cell["objectId"]
+		page += 1	
+		count = len(objects)
+		if count == 0:
+			break 
+
+	return dict
 
 ####  Authorize
 #GetAuthorized()
